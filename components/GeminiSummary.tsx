@@ -45,10 +45,10 @@ export const GeminiSummary: React.FC = () => {
 
       {loading && (
         <div className="mt-8 font-mono text-neon-blue animate-pulse p-4 border-l-2 border-neon-blue bg-black/30">
-          > P.N. подключается... <br/>
-          > Анализ 14 000 багов... <br/>
-          > Загрузка контекста Markswebb... <br/>
-          > Формулирование речи...
+          &gt; P.N. подключается... <br/>
+          &gt; Анализ 14 000 багов... <br/>
+          &gt; Загрузка контекста Markswebb... <br/>
+          &gt; Формулирование речи...
         </div>
       )}
 
