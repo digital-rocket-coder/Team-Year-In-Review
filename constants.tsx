@@ -20,7 +20,11 @@ import {
   Bug,
   Award,
   Terminal,
-  Activity
+  Activity,
+  Layers,
+  Calendar,
+  ThumbsUp,
+  MousePointer2
 } from 'lucide-react';
 import { StatItem, ThemeColor } from './types';
 
@@ -33,13 +37,13 @@ export const APP_CONFIG = {
   heroStatus: 'System Update Complete'
 };
 
-// 🔥 HIGHLIGHTS (Из твоего списка + топ)
+// 🔥 HIGHLIGHTS (Топ достижения)
 export const HIGHLIGHTS_STATS: StatItem[] = [
   {
     id: 'rank-ib',
     label: 'Markswebb Rank',
     value: '#3',
-    subValue: 'Top 3',
+    subValue: '2 раза',
     icon: <Globe className="w-6 h-6" />,
     color: ThemeColor.GOLD,
     type: 'rank'
@@ -53,10 +57,11 @@ export const HIGHLIGHTS_STATS: StatItem[] = [
     type: 'default'
   },
   {
-    id: 'builds',
-    label: 'Сборок выпущено',
-    value: '9 500',
-    icon: <Terminal className="w-6 h-6" />,
+    id: 'events-total',
+    label: 'Событий за год',
+    value: '80',
+    subValue: 'млрд',
+    icon: <Activity className="w-6 h-6" />,
     color: ThemeColor.BLUE,
     type: 'default'
   },
@@ -99,42 +104,43 @@ export const PRODUCT_STATS: StatItem[] = [
   {
     id: 'new-features',
     label: 'Запущено новых фич',
-    value: 'XX',
+    value: '2 300',
     icon: <Zap className="w-6 h-6" />,
     color: ThemeColor.BLUE
   },
   {
     id: 'scenarios',
     label: 'Улучшено сценариев',
-    value: 'XX',
+    value: '34',
     icon: <Map className="w-6 h-6" />,
     color: ThemeColor.GREEN
   },
   {
     id: 'ux-research',
     label: 'UX-исследований',
-    value: 'XX',
+    value: '30',
     icon: <FlaskConical className="w-6 h-6" />,
     color: ThemeColor.PURPLE
   },
   {
     id: 'design-system',
-    label: 'Обновлений DS',
-    value: 'XX',
+    label: 'Компонентов DS',
+    value: '109',
+    subValue: 'Web+App',
     icon: <Layout className="w-6 h-6" />,
     color: ThemeColor.PINK
   },
   {
     id: 'ab-tests',
     label: 'A/B-тестов',
-    value: 'XX',
+    value: 'XX', // Оставляем, если данных нет, или можно скрыть
     icon: <FlaskConical className="w-6 h-6" />,
     color: ThemeColor.BLUE
   },
   {
     id: 'release-cycle',
-    label: 'Cycle Time (дни)',
-    value: 'XX',
+    label: 'Lead Time (дни)',
+    value: '19',
     icon: <Clock className="w-6 h-6" />,
     color: ThemeColor.WHITE
   }
@@ -145,38 +151,38 @@ export const USAGE_STATS: StatItem[] = [
   {
     id: 'mau-peak',
     label: 'MAU (Пик)',
-    value: 'XX',
+    value: '4.86',
     subValue: 'млн',
     icon: <Users className="w-6 h-6" />,
     color: ThemeColor.BLUE
   },
   {
-    id: 'operations',
-    label: 'Операций в ДБО',
-    value: 'XX',
+    id: 'web-users',
+    label: 'Юзеров на сайте',
+    value: '39',
     subValue: 'млн',
-    icon: <CreditCard className="w-6 h-6" />,
+    icon: <Globe className="w-6 h-6" />,
     color: ThemeColor.GREEN
   },
   {
-    id: 'digital-products',
-    label: 'Открыто продуктов',
-    value: 'XX',
-    icon: <Smartphone className="w-6 h-6" />,
+    id: 'rustore',
+    label: 'Оценок RuStore',
+    value: '47.1',
+    subValue: 'тыс',
+    icon: <ThumbsUp className="w-6 h-6" />,
     color: ThemeColor.PURPLE
   },
   {
-    id: 'digital-share',
-    label: 'Доля продаж',
-    value: 'XX',
-    subValue: '%',
-    icon: <TrendingUp className="w-6 h-6" />,
+    id: 'daily-clients',
+    label: 'Заходили ежедневно',
+    value: '1 050',
+    icon: <Users className="w-6 h-6" />,
     color: ThemeColor.GOLD
   },
   {
     id: 'devices',
-    label: 'Активных устройств',
-    value: 'XX',
+    label: 'Вовлеченность',
+    value: '33%',
     icon: <Smartphone className="w-6 h-6" />,
     color: ThemeColor.WHITE
   }
@@ -187,7 +193,7 @@ export const QUALITY_STATS: StatItem[] = [
   {
     id: 'csi-avg',
     label: 'Средний CSI',
-    value: 'XX',
+    value: '4.24',
     maxValue: 5,
     icon: <Smile className="w-6 h-6" />,
     color: ThemeColor.GREEN,
@@ -195,22 +201,22 @@ export const QUALITY_STATS: StatItem[] = [
   },
   {
     id: 'support-calls',
-    label: 'Снижение обращений',
-    value: '-XX%',
+    label: 'Снижение жалоб',
+    value: '-5.5%',
     icon: <TrendingUp className="w-6 h-6 rotate-180" />, // Arrow down visually
     color: ThemeColor.BLUE
   },
   {
     id: 'app-speed',
     label: 'Ускорение запуска',
-    value: 'xXX',
+    value: '+25%',
     icon: <Zap className="w-6 h-6" />,
     color: ThemeColor.GOLD
   },
   {
     id: 'incidents',
-    label: 'Инциденты P1/P2',
-    value: 'XX',
+    label: 'Сокращение ошибок',
+    value: '↓ 2x',
     icon: <AlertTriangle className="w-6 h-6" />,
     color: ThemeColor.PINK
   },
@@ -226,24 +232,24 @@ export const QUALITY_STATS: StatItem[] = [
 // 🧠 Команда и культура
 export const TEAM_STATS: StatItem[] = [
   {
-    id: 'team-size',
-    label: 'Размер команды',
-    value: 'XX',
-    icon: <Users className="w-6 h-6" />,
+    id: 'team-reshuffle',
+    label: 'Пересобрали команд',
+    value: '13',
+    icon: <Layers className="w-6 h-6" />,
     color: ThemeColor.BLUE
   },
   {
     id: 'training',
     label: 'Внутренних обучений',
-    value: 'XX',
+    value: '34',
     icon: <GraduationCap className="w-6 h-6" />,
     color: ThemeColor.PURPLE
   },
   {
-    id: 'conferences',
-    label: 'Спикеров',
-    value: 'XX',
-    icon: <Mic className="w-6 h-6" />,
+    id: 'dailies',
+    label: 'Дейликов',
+    value: '1 485',
+    icon: <Calendar className="w-6 h-6" />,
     color: ThemeColor.PINK
   },
   {
@@ -256,35 +262,35 @@ export const TEAM_STATS: StatItem[] = [
   {
     id: 'strat-sessions',
     label: 'Стратсессий',
-    value: 'XX',
+    value: '1',
     icon: <Map className="w-6 h-6" />,
     color: ThemeColor.GREEN
   }
 ];
 
-// 💰 Бизнес-эффект
+// 💰 Бизнес-эффект (Используем данные из блока Клиенты для заполнения)
 export const BUSINESS_STATS: StatItem[] = [
   {
-    id: 'sales-growth',
-    label: 'Рост продаж',
-    value: '+XX%',
+    id: 'digital-share',
+    label: 'Доля продаж',
+    value: '91.4%',
     icon: <TrendingUp className="w-6 h-6" />,
     color: ThemeColor.GREEN
   },
   {
-    id: 'automation-save',
-    label: 'Экономия (авто)',
-    value: 'XX',
-    subValue: 'млн ₽',
-    icon: <PiggyBank className="w-6 h-6" />,
+    id: 'operations',
+    label: 'Операций в ДБО',
+    value: '507',
+    subValue: 'млн',
+    icon: <MousePointer2 className="w-6 h-6" />,
     color: ThemeColor.BLUE
   },
   {
-    id: 'digital-clients-growth',
-    label: 'Рост доли клиентов',
-    value: '+XX',
-    subValue: 'п.п.',
-    icon: <Users className="w-6 h-6" />,
+    id: 'digital-products',
+    label: 'Открыто продуктов',
+    value: '6.8',
+    subValue: 'млн',
+    icon: <CreditCard className="w-6 h-6" />,
     color: ThemeColor.PURPLE
   },
   {
@@ -292,7 +298,7 @@ export const BUSINESS_STATS: StatItem[] = [
     label: 'Доход от фич',
     value: 'XX',
     subValue: 'млн ₽',
-    icon: <CreditCard className="w-6 h-6" />,
+    icon: <PiggyBank className="w-6 h-6" />,
     color: ThemeColor.GOLD
   }
 ];
@@ -330,21 +336,21 @@ export const FUN_STATS: StatItem[] = [
   {
     id: 'coffee',
     label: 'Литров кофе',
-    value: 'XX',
+    value: '16 800',
     icon: <Coffee className="w-6 h-6" />,
     color: ThemeColor.GOLD
   },
   {
     id: 'deadlines',
     label: 'Пережили дедлайнов',
-    value: 'XX',
+    value: '3 456',
     icon: <Activity className="w-6 h-6" />,
     color: ThemeColor.PINK
   },
   {
     id: 'prod-fix',
     label: 'Чинили прод',
-    value: 'XX',
+    value: '17',
     icon: <Terminal className="w-6 h-6" />,
     color: ThemeColor.WHITE
   }
