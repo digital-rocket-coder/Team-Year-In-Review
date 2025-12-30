@@ -15,6 +15,7 @@ import { GeminiSummary } from './components/GeminiSummary';
 import { TeamHoroscope } from './components/TeamHoroscope';
 import { DigitalSnow } from './components/DigitalSnow';
 import { EasterEggAlina } from './components/EasterEggAlina';
+import { BugNinja } from './components/BugNinja';
 import { ReleasesChart, FeedbackChart } from './components/Charts';
 import { NewYearCountdown } from './components/NewYearCountdown';
 import { QueryTerminal } from './components/QueryTerminal';
@@ -43,6 +44,7 @@ const App: React.FC = () => {
 
       <DigitalSnow />
       <EasterEggAlina />
+      <BugNinja />
 
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center backdrop-blur-md bg-dark-bg/40 border-b border-white/5">
