@@ -1,147 +1,68 @@
 
-import { GoogleGenAI } from "@google/genai";
 import { ALL_STATS, APP_CONFIG, TEAM_DNA } from "../constants";
 
+/**
+ * Возвращает статичную поздравительную речь.
+ */
 export const generateYearSummary = async (): Promise<string> => {
-  if (!process.env.API_KEY) {
-    return "API Key not configured. Unable to generate AI summary.";
-  }
+  return `Команда, это был по-настоящему легендарный год! 🚀
 
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-  const statsStr = ALL_STATS.map(d => `${d.label}: ${d.value} ${d.subValue || ''}`).join(', ');
+Мы пробили планку в 80 миллиардов событий, ворвались в Топ-3 Markswebb и держим 99,99% Crash Free — уровень, о котором многие могут только мечтать.
+За год вы выловили 14 000 багов и сделали продукт, которым ежедневно пользуются миллионы клиентов.
 
-  const prompt = `
-    Ты — P.N., харизматичный и амбициозный руководитель этой IT-команды (Team Core).
-    Сейчас конец ${APP_CONFIG.year} года. Мы подводим итоги.
-    
-    Вот наши факты за год:
-    ${statsStr}
-    
-    Твоя задача:
-    Напиши короткую, мощную и эмоциональную речь (пожелание) для своей команды.
-    
-    Как писать:
-    1. Тон: Гордый, драйвовый, лидерский, немного "гиковский". Ты ценишь людей больше цифр, но цифры тебя восхищают.
-    2. Обязательно подсвети главные победы: Markswebb Top-3, 99.99% Crash Free и то, что мы выловили 14 000 багов.
-    3. Используй "мы", "команда", "бандиты" или "рок-звезды".
-    4. Закончи эпичным призывом на 2026 год.
-    
-    Формат: Только текст, без Markdown. Максимум 4-5 предложений.
-  `;
+Android-приложение по качеству уже не уступает iOS и стабильно развивается регулярными релизами.
+Интернет-банк перестал быть просто backup-каналом на случай ограничений iOS и стал полноценным каналом развития, уже внедрившим изменения major-релиза.
 
-  try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
-      contents: prompt,
-    });
-    return response.text || "Связь с командным центром прервана. Но вы и так знаете, что вы лучшие!";
-  } catch (error) {
-    console.error("Gemini API Error:", error);
-    return "AI перегружен крутостью ваших результатов. Попробуйте еще раз.";
-  }
+Отдельная гордость — iOS. Несмотря на санкции и ограничения, мы весь год стабильно выкладывали мобильное приложение. В конце года мы сделали невозможное: побили рекорд среди всех банков и уже 5 дней подряд удерживаемся в App Store — это по-настоящему сильный результат.
+
+Центры экспертизы — это наша стратегическая сила. Это команды экспертов, которые исследуют, внедряют новые технологии, улучшения и изменения, формируют лучшие практики — и именно они затем масштабируются и используются всеми командами.
+
+В 2026 году мы не сбавляем темп. Наша цель — абсолютное лидерство, эталонный клиентский опыт и идеальный код.
+
+Горжусь работать с вами.
+Вы — настоящие рок-звёзды IT 🤘`;
 };
-
-export const queryTerminalData = async (query: string): Promise<string> => {
-  if (!process.env.API_KEY) return "ERROR: API_KEY_MISSING";
-
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-  const statsStr = ALL_STATS.map(d => `${d.label}: ${d.value}`).join(', ');
-
-  const prompt = `
-    Ты — бортовой компьютер системы TEAM_CORE v4.0.5. 
-    Твоя база данных содержит итоги 2025 года: ${statsStr}.
-    
-    Пользователь вводит запрос: "${query}"
-    
-    Твои инструкции:
-    1. Отвечай кратко, в стиле хакерского терминала.
-    2. Используй только предоставленные данные. Если данных нет, отвечай "DATA_NOT_FOUND".
-    3. Если спрашивают про "лучшего" или "мемы", отвечай с юмором, но ссылаясь на цифры (например, про 16 000 литров кофе).
-    4. Твой тон: холодный, аналитический, с легким киберпанк-налетом.
-    
-    Максимальная длина ответа: 200 символов. Без Markdown.
-  `;
-
-  try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
-      contents: prompt,
-    });
-    return response.text?.trim() || "SYSTEM_IDLE";
-  } catch (error) {
-    return "CONNECTION_INTERRUPTED";
-  }
-};
-
-export const generateHoroscope = async (): Promise<string> => {
-    if (!process.env.API_KEY) {
-      return "Звезды не видят API KEY.";
-    }
-  
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-    
-    const prompt = `
-      Ты — мистический AI-астролог, который специализируется на корпоративной ДНК и психотипах команд (CliftonStrengths).
-      
-      ДНК нашей команды:
-      1. Исполнение: ${TEAM_DNA.executing.value}.
-      2. Стратегическое мышление: ${TEAM_DNA.strategic.value}.
-      3. Построение отношений: ${TEAM_DNA.relationship.value}.
-      4. Влияние: ${TEAM_DNA.influencing.value}. (Это наша зона роста).
-  
-      Задача:
-      Составь ироничный, смешной "Гороскоп команды на 2026 год".
-      Смесь технарского жаргона, астрологии и корпоративного юмора.
-      
-      Формат: Только 3-4 предложения. Максимально емко.
-    `;
-  
-    try {
-      const response = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
-        contents: prompt,
-      });
-      return response.text || "Звезды сложились в `undefined`. Попробуйте позже.";
-    } catch (error) {
-      console.error("Gemini API Error:", error);
-      return "Космические помехи. Астролог ушел в астрал.";
-    }
-  };
 
 /**
- * Generates a high-quality AI avatar using Gemini 3 Pro Image.
- * Requires a selected API key in the environment.
+ * Возвращает ответ терминала из локального словаря.
+ */
+export const queryTerminalData = async (query: string): Promise<string> => {
+  const cmd = query.toLowerCase().trim();
+  const responses: Record<string, string> = {
+    'stats': 'CORE_REPORT: 80B events, 2.3K features, 4.8M MAU peak. System nominal.',
+    'bugs': 'BUG_TRACKER: 14,000 entities neutralized. QA coverage at 94%.',
+    'coffee': 'FUEL_LEVEL: 16,800 liters consumed. Caffeine saturation: CRITICAL.',
+    'markswebb': 'RANKING_SERVICE: TOP-3 achievement unlocked (2x in 2025).',
+    'crash': 'STABILITY_LOG: 99.99% Crash-Free rate maintained. Uptime optimal.',
+    'team': 'COLLECTIVE_ID: Team Core. 13 reshuffles completed. Culture stable.'
+  };
+
+  return responses[cmd] || "ERROR: COMMAND_NOT_FOUND. ACCESS_DENIED.";
+};
+
+/**
+ * Возвращает статичный гороскоп.
+ */
+export const generateHoroscope = async (): Promise<string> => {
+  return `Звёзды (и Jira) говорят:
+в новом году наш код будет работать даже на калькуляторах —
+стабильно, быстро и без лишнего шума.
+
+Сильное Исполнение позволит сворачивать горы до обеда,
+Стратегия — выстраивать единую финансово-нефинансовую платформу,
+а ИИ — понимать запросы, находить нужное
+и помогать совершать операции в один клик.
+
+Совет года от Вселенной:
+меньше сомнений, больше масштаба.
+Хвалим себя громче — мы это точно заслужили.
+
+2026 — год Влияния. ✨`;
+};
+
+/**
+ * Заглушка для генерации аватара (теперь используется статический SVG).
  */
 export const generateCharacterAvatar = async (description: string): Promise<string | null> => {
-  // We create a new instance right before the call to ensure the latest selected key is used
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-  
-  try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-3-pro-image-preview',
-      contents: {
-        parts: [{ text: description }],
-      },
-      config: {
-        imageConfig: {
-          aspectRatio: "1:1",
-          imageSize: "1K"
-        }
-      }
-    });
-
-    for (const part of response.candidates?.[0]?.content?.parts || []) {
-      if (part.inlineData) {
-        return `data:image/png;base64,${part.inlineData.data}`;
-      }
-    }
-    return null;
-  } catch (error: any) {
-    console.error("Image Generation Error:", error);
-    // Handle specific "entity not found" error by throwing it up to reset key selection state
-    if (error?.message?.includes("Requested entity was not found")) {
-      throw new Error("KEY_RESET_REQUIRED");
-    }
-    return null;
-  }
+  return null;
 };
