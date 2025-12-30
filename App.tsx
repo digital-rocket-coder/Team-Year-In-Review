@@ -17,8 +17,8 @@ import { DigitalSnow } from './components/DigitalSnow';
 import { EasterEggAlina } from './components/EasterEggAlina';
 import { ReleasesChart, FeedbackChart } from './components/Charts';
 import { NewYearCountdown } from './components/NewYearCountdown';
-// Added CheckCircle2 to the imports from lucide-react
-import { Activity, Server, ArrowDown, Target, Zap, Coffee, BarChart3, Users, Heart, Terminal as TerminalIcon, Search, CheckCircle2 } from 'lucide-react';
+import { QueryTerminal } from './components/QueryTerminal';
+import { Activity, Server, ArrowDown, Target, Zap, Coffee, BarChart3, Users, Heart, CheckCircle2 } from 'lucide-react';
 
 const App: React.FC = () => {
   return (
@@ -106,7 +106,7 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        {/* SECTION: ANALYTICS DASHBOARD (NEW) */}
+        {/* SECTION: ANALYTICS DASHBOARD */}
         <section className="relative z-10 space-y-12">
           <div className="mb-12 flex items-center gap-4">
             <BarChart3 className="text-neon-purple" size={32} />
@@ -185,7 +185,7 @@ const App: React.FC = () => {
           <TeamHoroscope />
         </section>
 
-        {/* SECTION: FUN WRAP-UP (Moved up) */}
+        {/* SECTION: FUN WRAP-UP */}
         <section className="relative z-10">
           <div className="glass-card p-12 rounded-3xl space-y-12 border border-neon-pink/10">
             <div className="flex flex-col items-center gap-4 text-center">
@@ -208,39 +208,9 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        {/* SECTION: INTERACTIVE TERMINAL (Moved down) */}
+        {/* SECTION: INTERACTIVE TERMINAL */}
         <section className="relative z-10">
-           <div className="glass-card overflow-hidden border border-white/10 rounded-xl">
-              <div className="bg-white/5 px-4 py-2 border-b border-white/10 flex items-center justify-between">
-                 <div className="flex items-center gap-2">
-                    <TerminalIcon size={14} className="text-neon-blue" />
-                    <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest font-bold">Query Terminal v4.0.5</span>
-                 </div>
-                 <div className="flex gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
-                 </div>
-              </div>
-              <div className="p-6 md:p-12 space-y-8">
-                 <div className="flex flex-col items-center text-center gap-4">
-                    <Search className="text-neon-blue w-10 h-10 opacity-40" />
-                    <h3 className="text-2xl font-display font-bold uppercase">Запросить данные 2025</h3>
-                    <p className="text-gray-500 font-mono text-xs max-w-md">
-                      Задайте любой вопрос по итогам года ИИ-ассистенту. Проанализируем метрики, тренды и мемную активность.
-                    </p>
-                 </div>
-                 <div className="max-w-2xl mx-auto flex items-center gap-3 bg-black/60 border border-white/10 p-4 rounded-xl shadow-inner group focus-within:border-neon-blue transition-all">
-                    <span className="text-neon-blue font-mono font-bold">$</span>
-                    <input 
-                      type="text" 
-                      placeholder="Какая команда была самой активной в Q3?" 
-                      className="bg-transparent border-none outline-none flex-1 font-mono text-sm text-gray-200 placeholder:text-gray-700"
-                    />
-                    <kbd className="hidden md:block px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] font-mono text-gray-500">ENTER</kbd>
-                 </div>
-              </div>
-           </div>
+           <QueryTerminal />
         </section>
 
       </main>

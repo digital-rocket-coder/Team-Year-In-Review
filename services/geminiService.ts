@@ -41,6 +41,38 @@ export const generateYearSummary = async (): Promise<string> => {
   }
 };
 
+export const queryTerminalData = async (query: string): Promise<string> => {
+  if (!process.env.API_KEY) return "ERROR: API_KEY_MISSING";
+
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const statsStr = ALL_STATS.map(d => `${d.label}: ${d.value}`).join(', ');
+
+  const prompt = `
+    Ты — бортовой компьютер системы TEAM_CORE v4.0.5. 
+    Твоя база данных содержит итоги 2025 года: ${statsStr}.
+    
+    Пользователь вводит запрос: "${query}"
+    
+    Твои инструкции:
+    1. Отвечай кратко, в стиле хакерского терминала.
+    2. Используй только предоставленные данные. Если данных нет, отвечай "DATA_NOT_FOUND".
+    3. Если спрашивают про "лучшего" или "мемы", отвечай с юмором, но ссылаясь на цифры (например, про 16 000 литров кофе).
+    4. Твой тон: холодный, аналитический, с легким киберпанк-налетом.
+    
+    Максимальная длина ответа: 200 символов. Без Markdown.
+  `;
+
+  try {
+    const response = await ai.models.generateContent({
+      model: 'gemini-3-flash-preview',
+      contents: prompt,
+    });
+    return response.text?.trim() || "SYSTEM_IDLE";
+  } catch (error) {
+    return "CONNECTION_INTERRUPTED";
+  }
+};
+
 export const generateHoroscope = async (): Promise<string> => {
     if (!process.env.API_KEY) {
       return "Звезды не видят API KEY.";
@@ -77,22 +109,23 @@ export const generateHoroscope = async (): Promise<string> => {
   };
 
 /**
- * Generates an AI avatar for a character using the image model.
+ * Generates a high-quality AI avatar using Gemini 3 Pro Image.
+ * Requires a selected API key in the environment.
  */
 export const generateCharacterAvatar = async (description: string): Promise<string | null> => {
-  if (!process.env.API_KEY) return null;
-
+  // We create a new instance right before the call to ensure the latest selected key is used
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash-image',
+      model: 'gemini-3-pro-image-preview',
       contents: {
         parts: [{ text: description }],
       },
       config: {
         imageConfig: {
-          aspectRatio: "1:1"
+          aspectRatio: "1:1",
+          imageSize: "1K"
         }
       }
     });
@@ -103,8 +136,12 @@ export const generateCharacterAvatar = async (description: string): Promise<stri
       }
     }
     return null;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Image Generation Error:", error);
+    // Handle specific "entity not found" error by throwing it up to reset key selection state
+    if (error?.message?.includes("Requested entity was not found")) {
+      throw new Error("KEY_RESET_REQUIRED");
+    }
     return null;
   }
 };
