@@ -18,7 +18,7 @@ import { EasterEggAlina } from './components/EasterEggAlina';
 import { ReleasesChart, FeedbackChart } from './components/Charts';
 import { NewYearCountdown } from './components/NewYearCountdown';
 import { QueryTerminal } from './components/QueryTerminal';
-import { Activity, Server, ArrowDown, Target, Zap, Coffee, BarChart3, Users, Heart, CheckCircle2 } from 'lucide-react';
+import { Activity, Server, ArrowDown, Target, Zap, Coffee, BarChart3, Users, Heart, CheckCircle2, TrendingUp } from 'lucide-react';
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -121,6 +121,19 @@ const App: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
              <ReleasesChart />
              <FeedbackChart />
+          </div>
+        </section>
+
+        {/* SECTION: BUSINESS EFFECT */}
+        <section className="relative z-10 space-y-12">
+          <div className="flex items-center gap-4 border-b border-white/5 pb-6">
+            <TrendingUp className="text-neon-green" size={32} />
+            <h2 className="text-3xl md:text-5xl font-display font-bold uppercase tracking-tight">Бизнес-эффект</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+             {BUSINESS_STATS.map((item, i) => (
+               <StatCard key={item.id} item={item} delay={i * 100} />
+             ))}
           </div>
         </section>
 

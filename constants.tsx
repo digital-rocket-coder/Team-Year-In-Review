@@ -27,7 +27,9 @@ import {
   Award,
   ZapOff,
   UserCheck,
-  Target
+  Target,
+  FileCode2,
+  Stethoscope
 } from 'lucide-react';
 import { StatItem, ThemeColor } from './types';
 
@@ -164,24 +166,25 @@ export const QUALITY_STATS: StatItem[] = [
     type: 'scale'
   },
   {
-    id: 'complaints-reduction',
-    label: 'Снижение жалоб',
-    value: '5,5%',
-    icon: <TrendingUp className="w-6 h-6 rotate-180" />,
+    id: 'crash-free',
+    label: 'Crash-Free Rate',
+    value: '99,99%',
+    icon: <Stethoscope className="w-6 h-6" />,
     color: ThemeColor.BLUE
   },
   {
-    id: 'launch-speedup',
-    label: 'Ускорили запуск приложения',
-    value: 'на 25%',
-    icon: <Zap className="w-6 h-6" />,
+    id: 'tests-count',
+    label: 'Объём тестов',
+    value: '24 000',
+    subValue: 'в цифровых каналах',
+    icon: <FileCode2 className="w-6 h-6" />,
     color: ThemeColor.PURPLE
   },
   {
-    id: 'error-reduction',
-    label: 'Сократили ошибки',
-    value: 'в 2 раза',
-    icon: <ShieldAlert className="w-6 h-6" />,
+    id: 'auto-coverage',
+    label: 'Авто-тесты покрытие',
+    value: '33%',
+    icon: <ShieldCheck className="w-6 h-6" />,
     color: ThemeColor.PINK
   }
 ];
@@ -308,7 +311,6 @@ export const ALL_STATS = [
 
 /**
  * 📊 Формируем RELEASES_DATA на основе общего количества фич (2 300)
- * Распределение по типам задач (примерное, но логичное для 2025 года)
  */
 export const RELEASES_DATA = [
   { name: 'Новые фичи (CORE)', value: 1035, fill: '#00f3ff' }, // 45%
@@ -318,14 +320,15 @@ export const RELEASES_DATA = [
 ];
 
 /**
- * 📈 Формируем FEEDBACK_DATA на основе ключевых KPI из лендинга
+ * 📈 Ключевые метрики для системного дашборда (Data Analytics Hub)
  */
-export const FEEDBACK_DATA = [
-  { name: 'Digital Share', value: 91, fill: '#00f3ff' },      // Из BUSINESS_STATS (91.4%)
-  { name: 'QA Coverage', value: 94, fill: '#bc13fe' },        // Из терминала (94%)
-  { name: 'Crash-Free Rate', value: 99, fill: '#0aff00' },    // Из терминала/саммари (99.99%)
-  { name: 'Store Success', value: 85, fill: '#ff0055' },      // Условный успех релизов в сторы
-  { name: 'User Engagement', value: 33, fill: '#facc15' }     // Из USAGE_STATS (33%)
+export const HUB_VITAL_STATS = [
+  { label: 'Операции через ДБО', value: '507 млн', color: 'text-neon-blue', icon: <MousePointer2 size={14}/> },
+  { label: 'Продукты в цифре', value: '6 827 000', color: 'text-neon-purple', icon: <CreditCard size={14}/> },
+  { label: 'Доля цифр. продаж', value: '91.4%', color: 'text-neon-green', icon: <TrendingUp size={14}/> },
+  { label: 'CrashFree Rate', value: '99.99%', color: 'text-neon-blue', icon: <Stethoscope size={14}/> },
+  { label: 'Объём тестов', value: '24 000', color: 'text-neon-purple', icon: <FileCode2 size={14}/> },
+  { label: 'Авто-тесты (покрытие)', value: '33%', color: 'text-neon-pink', icon: <ShieldCheck size={14}/> },
 ];
 
 // Team DNA exported for components and AI services
