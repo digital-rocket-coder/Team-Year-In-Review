@@ -37,6 +37,34 @@ export const APP_CONFIG = {
   heroStatus: 'System Update Complete'
 };
 
+// 🧬 TEAM DNA (CliftonStrengths Data)
+export const TEAM_DNA = {
+  executing: {
+    label: 'Исполнение',
+    value: 68,
+    desc: 'Трудоголики и финишеры',
+    color: 'bg-neon-purple text-neon-purple shadow-[0_0_15px_#bc13fe]'
+  },
+  influencing: {
+    label: 'Влияние',
+    value: 18,
+    desc: 'Скромные гении',
+    color: 'bg-yellow-500 text-yellow-500 shadow-[0_0_15px_#eab308]'
+  },
+  relationship: {
+    label: 'Отношения',
+    value: 54,
+    desc: 'Командный клей',
+    color: 'bg-neon-blue text-neon-blue shadow-[0_0_15px_#00f3ff]'
+  },
+  strategic: {
+    label: 'Стратегия',
+    value: 60,
+    desc: 'Мозговой центр',
+    color: 'bg-red-500 text-red-500 shadow-[0_0_15px_#ef4444]'
+  }
+};
+
 // 🔥 HIGHLIGHTS (Топ достижения)
 export const HIGHLIGHTS_STATS: StatItem[] = [
   {
@@ -59,16 +87,16 @@ export const HIGHLIGHTS_STATS: StatItem[] = [
   {
     id: 'events-total',
     label: 'Событий за год',
-    value: '80',
-    subValue: 'млрд',
+    value: '80 000 000 000',
     icon: <Activity className="w-6 h-6" />,
     color: ThemeColor.BLUE,
-    type: 'default'
+    type: 'default',
+    colSpan: 'md:col-span-2'
   },
   {
     id: 'crash-free',
     label: 'Crash Free',
-    value: '99.99%',
+    value: '99,99%',
     icon: <Activity className="w-6 h-6" />,
     color: ThemeColor.GREEN,
     type: 'default'
@@ -159,8 +187,7 @@ export const USAGE_STATS: StatItem[] = [
   {
     id: 'web-users',
     label: 'Юзеров на сайте',
-    value: '39',
-    subValue: 'млн',
+    value: '39 000 000',
     icon: <Globe className="w-6 h-6" />,
     color: ThemeColor.GREEN
   },
@@ -202,7 +229,7 @@ export const QUALITY_STATS: StatItem[] = [
   {
     id: 'support-calls',
     label: 'Снижение жалоб',
-    value: '-5.5%',
+    value: '5%',
     icon: <TrendingUp className="w-6 h-6 rotate-180" />, // Arrow down visually
     color: ThemeColor.BLUE
   },
@@ -216,16 +243,9 @@ export const QUALITY_STATS: StatItem[] = [
   {
     id: 'incidents',
     label: 'Сокращение ошибок',
-    value: '↓ 2x',
+    value: '2 раза',
     icon: <AlertTriangle className="w-6 h-6" />,
     color: ThemeColor.PINK
-  },
-  {
-    id: 'mttr',
-    label: 'MTTR (мин)',
-    value: 'XX',
-    icon: <Clock className="w-6 h-6" />,
-    color: ThemeColor.WHITE
   }
 ];
 
@@ -253,13 +273,6 @@ export const TEAM_STATS: StatItem[] = [
     color: ThemeColor.PINK
   },
   {
-    id: 'certs',
-    label: 'Сертификаций',
-    value: 'XX',
-    icon: <Award className="w-6 h-6" />,
-    color: ThemeColor.GOLD
-  },
-  {
     id: 'strat-sessions',
     label: 'Стратсессий',
     value: '1',
@@ -280,26 +293,16 @@ export const BUSINESS_STATS: StatItem[] = [
   {
     id: 'operations',
     label: 'Операций в ДБО',
-    value: '507',
-    subValue: 'млн',
+    value: '507 000 000',
     icon: <MousePointer2 className="w-6 h-6" />,
     color: ThemeColor.BLUE
   },
   {
     id: 'digital-products',
     label: 'Открыто продуктов',
-    value: '6.8',
-    subValue: 'млн',
+    value: '6 800 000',
     icon: <CreditCard className="w-6 h-6" />,
     color: ThemeColor.PURPLE
-  },
-  {
-    id: 'feature-income',
-    label: 'Доход от фич',
-    value: 'XX',
-    subValue: 'млн ₽',
-    icon: <PiggyBank className="w-6 h-6" />,
-    color: ThemeColor.GOLD
   }
 ];
 

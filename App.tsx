@@ -11,7 +11,8 @@ import {
 } from './constants';
 import { StatCard } from './components/StatCard';
 import { GeminiSummary } from './components/GeminiSummary';
-import { Activity, Server, ArrowDown, ChevronRight, Zap, Coffee } from 'lucide-react';
+import { TeamHoroscope } from './components/TeamHoroscope';
+import { Activity, Server, ArrowDown, ChevronRight, Zap, Coffee, Sparkles } from 'lucide-react';
 
 const App: React.FC = () => {
   return (
@@ -182,6 +183,15 @@ const App: React.FC = () => {
               ))}
            </div>
         </div>
+      </section>
+
+      {/* SECTION: TEAM HOROSCOPE (New!) */}
+      <section className="relative py-16 px-4 md:px-12 z-10 max-w-4xl mx-auto">
+        <div className="mb-8 flex items-center justify-center gap-2 opacity-50">
+           <Sparkles className="text-neon-purple w-4 h-4" />
+           <span className="text-xs font-mono uppercase tracking-widest text-neon-purple">Experimental Module</span>
+        </div>
+        <TeamHoroscope />
       </section>
 
       {/* SECTION: AI INSIGHTS */}
