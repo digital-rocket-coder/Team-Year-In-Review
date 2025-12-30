@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { 
   Smartphone, 
@@ -14,17 +15,19 @@ import {
   ShieldCheck,
   AlertTriangle,
   GraduationCap,
-  Mic,
-  PiggyBank,
-  Coffee,
-  Bug,
-  Award,
-  Terminal,
   Activity,
   Layers,
   Calendar,
   ThumbsUp,
-  MousePointer2
+  MousePointer2,
+  Timer,
+  ShieldAlert,
+  Coffee,
+  Bug,
+  Award,
+  ZapOff,
+  UserCheck,
+  Target
 } from 'lucide-react';
 import { StatItem, ThemeColor } from './types';
 
@@ -32,98 +35,38 @@ import { StatItem, ThemeColor } from './types';
 export const APP_CONFIG = {
   year: '2025',
   appName: 'TEAM_CORE',
-  reportName: 'REPORT_2025.LOG',
+  reportName: 'FINAL_RECAP_2025.LOG',
   heroTitle: 'Итоги Года',
-  heroStatus: 'System Update Complete'
+  heroStatus: 'Mission Accomplished'
 };
 
-// 🧬 TEAM DNA (CliftonStrengths Data)
-export const TEAM_DNA = {
-  executing: {
-    label: 'Исполнение',
-    value: 68,
-    desc: 'Трудоголики и финишеры',
-    color: 'bg-neon-purple text-neon-purple shadow-[0_0_15px_#bc13fe]'
-  },
-  influencing: {
-    label: 'Влияние',
-    value: 18,
-    desc: 'Скромные гении',
-    color: 'bg-yellow-500 text-yellow-500 shadow-[0_0_15px_#eab308]'
-  },
-  relationship: {
-    label: 'Отношения',
-    value: 54,
-    desc: 'Командный клей',
-    color: 'bg-neon-blue text-neon-blue shadow-[0_0_15px_#00f3ff]'
-  },
-  strategic: {
-    label: 'Стратегия',
-    value: 60,
-    desc: 'Мозговой центр',
-    color: 'bg-red-500 text-red-500 shadow-[0_0_15px_#ef4444]'
-  }
-};
-
-// 🔥 HIGHLIGHTS (Топ достижения)
+// 🔥 HIGHLIGHTS (Главные победы)
 export const HIGHLIGHTS_STATS: StatItem[] = [
   {
-    id: 'rank-ib',
-    label: 'Markswebb Rank',
-    value: '#3',
-    subValue: '2 раза',
-    icon: <Globe className="w-6 h-6" />,
+    id: 'markswebb',
+    label: 'Markswebb TOP-3',
+    value: '2 раза',
+    subValue: 'Признание рынка',
+    icon: <Award className="w-6 h-6" />,
     color: ThemeColor.GOLD,
-    type: 'rank'
-  },
-  {
-    id: 'bugs',
-    label: 'Багов отловлено',
-    value: '14 000',
-    icon: <Bug className="w-6 h-6" />,
-    color: ThemeColor.PINK,
-    type: 'default'
+    type: 'rank',
+    colSpan: 'col-span-1'
   },
   {
     id: 'events-total',
-    label: 'Событий за год',
+    label: 'Событий во всех каналах',
     value: '80 000 000 000',
     icon: <Activity className="w-6 h-6" />,
     color: ThemeColor.BLUE,
-    type: 'default',
-    colSpan: 'md:col-span-2'
+    colSpan: 'col-span-1 md:col-span-2'
   },
   {
-    id: 'crash-free',
-    label: 'Crash Free',
-    value: '99,99%',
-    icon: <Activity className="w-6 h-6" />,
-    color: ThemeColor.GREEN,
-    type: 'default'
-  },
-  {
-    id: 'awards',
-    label: 'Наград получено',
-    value: 4,
-    icon: <Award className="w-6 h-6" />,
-    color: ThemeColor.GOLD,
-    type: 'rank'
-  },
-  {
-    id: 'interviews',
-    label: 'Собеседований',
-    value: '400+',
-    icon: <Users className="w-6 h-6" />,
-    color: ThemeColor.PURPLE,
-    type: 'default'
-  },
-  {
-    id: 'web-releases',
-    label: 'Релизов сайта',
-    value: 57,
-    icon: <Globe className="w-6 h-6" />,
-    color: ThemeColor.BLUE,
-    type: 'default'
+    id: 'ios-survival',
+    label: 'Продержались в AppStore',
+    value: '> 7 дней',
+    subValue: 'без удаления',
+    icon: <ShieldCheck className="w-6 h-6" />,
+    color: ThemeColor.GREEN
   }
 ];
 
@@ -151,68 +94,69 @@ export const PRODUCT_STATS: StatItem[] = [
     color: ThemeColor.PURPLE
   },
   {
-    id: 'design-system',
-    label: 'Компонентов DS',
-    value: '109',
-    subValue: 'Web+App',
+    id: 'design-components',
+    label: 'Компонентов (Дизайн)',
+    value: '49',
+    subValue: 'Web: 38 / Mobile: 22',
     icon: <Layout className="w-6 h-6" />,
     color: ThemeColor.PINK
   },
   {
-    id: 'release-cycle',
-    label: 'Lead Time (дни)',
+    id: 'lead-time',
+    label: 'Средний Lead Time',
     value: '19',
-    icon: <Clock className="w-6 h-6" />,
-    color: ThemeColor.WHITE
+    subValue: 'дней до прода',
+    icon: <Timer className="w-6 h-6" />,
+    color: ThemeColor.GOLD
   }
 ];
 
 // 👥 Клиенты и использование
 export const USAGE_STATS: StatItem[] = [
   {
-    id: 'mau-peak',
-    label: 'MAU (Пик)',
-    value: '4.86',
-    subValue: 'млн',
+    id: 'mau-peak-high',
+    label: 'MAU в пике года',
+    value: '4,857 млн',
+    subValue: 'Абсолютный рекорд',
     icon: <Users className="w-6 h-6" />,
     color: ThemeColor.BLUE
   },
   {
-    id: 'web-users',
-    label: 'Юзеров на сайте',
-    value: '39 млн',
-    icon: <Globe className="w-6 h-6" />,
+    id: 'engagement',
+    label: 'Вовлеченность (Engagement)',
+    value: '33%',
+    icon: <TrendingUp className="w-6 h-6" />,
     color: ThemeColor.GREEN
   },
   {
-    id: 'rustore',
-    label: 'Оценок RuStore',
-    value: '47.1',
-    subValue: 'тыс',
-    icon: <ThumbsUp className="w-6 h-6" />,
+    id: 'daily-clients',
+    label: 'Заходили ежедневно весь год',
+    value: '1 050',
+    subValue: 'Лояльные клиенты',
+    icon: <UserCheck className="w-6 h-6" />,
     color: ThemeColor.PURPLE
   },
   {
-    id: 'daily-clients',
-    label: 'Заходили ежедневно',
-    value: '1 050',
-    icon: <Users className="w-6 h-6" />,
-    color: ThemeColor.GOLD
+    id: 'rustore',
+    label: 'Оценок в RuStore',
+    value: '47,1 тыс.',
+    icon: <ThumbsUp className="w-6 h-6" />,
+    color: ThemeColor.BLUE
   },
   {
-    id: 'devices',
-    label: 'Вовлеченность',
-    value: '33%',
-    icon: <Smartphone className="w-6 h-6" />,
-    color: ThemeColor.WHITE
+    id: 'web-users',
+    label: 'Пользователей на сайте',
+    value: '39 млн',
+    icon: <Globe className="w-6 h-6" />,
+    color: ThemeColor.GREEN
   }
 ];
 
-// 📈 Качество и надёжность
+// 📉 Качество и надёжность
 export const QUALITY_STATS: StatItem[] = [
   {
     id: 'csi-avg',
-    label: 'Средний CSI',
+    label: 'Средний CSI за год',
     value: '4.24',
     maxValue: 5,
     icon: <Smile className="w-6 h-6" />,
@@ -220,24 +164,24 @@ export const QUALITY_STATS: StatItem[] = [
     type: 'scale'
   },
   {
-    id: 'support-calls',
+    id: 'complaints-reduction',
     label: 'Снижение жалоб',
     value: '5,5%',
     icon: <TrendingUp className="w-6 h-6 rotate-180" />,
     color: ThemeColor.BLUE
   },
   {
-    id: 'app-speed',
-    label: 'Ускорение запуска',
-    value: '+25%',
+    id: 'launch-speedup',
+    label: 'Ускорили запуск приложения',
+    value: 'на 25%',
     icon: <Zap className="w-6 h-6" />,
-    color: ThemeColor.GOLD
+    color: ThemeColor.PURPLE
   },
   {
-    id: 'incidents',
-    label: 'Сокращение ошибок',
-    value: '-50%',
-    icon: <AlertTriangle className="w-6 h-6" />,
+    id: 'error-reduction',
+    label: 'Сократили ошибки',
+    value: 'в 2 раза',
+    icon: <ShieldAlert className="w-6 h-6" />,
     color: ThemeColor.PINK
   }
 ];
@@ -259,43 +203,43 @@ export const TEAM_STATS: StatItem[] = [
     color: ThemeColor.PURPLE
   },
   {
+    id: 'strat-sessions',
+    label: 'Стратегических сессий',
+    value: '1',
+    icon: <Target className="w-6 h-6" />,
+    color: ThemeColor.GOLD
+  },
+  {
     id: 'dailies',
-    label: 'Дейликов',
+    label: 'Дейликов проведено',
     value: '1 485',
     icon: <Calendar className="w-6 h-6" />,
     color: ThemeColor.PINK
-  },
-  {
-    id: 'strat-sessions',
-    label: 'Стратсессий',
-    value: '1',
-    icon: <Map className="w-6 h-6" />,
-    color: ThemeColor.GREEN
   }
 ];
 
 // 💰 Бизнес-эффект
 export const BUSINESS_STATS: StatItem[] = [
   {
-    id: 'digital-share',
-    label: 'Доля продаж',
-    value: '91.4%',
-    icon: <TrendingUp className="w-6 h-6" />,
-    color: ThemeColor.GREEN
-  },
-  {
     id: 'operations',
-    label: 'Операций в ДБО',
+    label: 'Операций через ДБО',
     value: '507 000 000',
     icon: <MousePointer2 className="w-6 h-6" />,
     color: ThemeColor.BLUE
   },
   {
     id: 'digital-products',
-    label: 'Открыто продуктов',
-    value: '6 800 000',
+    label: 'Открыто продуктов в цифре',
+    value: '6 827 000',
     icon: <CreditCard className="w-6 h-6" />,
     color: ThemeColor.PURPLE
+  },
+  {
+    id: 'digital-share',
+    label: 'Доля цифровых продаж',
+    value: '91,4%',
+    icon: <TrendingUp className="w-6 h-6" />,
+    color: ThemeColor.GREEN
   }
 ];
 
@@ -318,15 +262,15 @@ export const FUN_STATS: StatItem[] = [
   {
     id: 'workdays',
     label: 'Рабочих будней',
-    value: 247,
-    icon: <Clock className="w-6 h-6" />,
+    value: '247',
+    icon: <Calendar className="w-6 h-6" />,
     color: ThemeColor.BLUE
   },
   {
-    id: 'meetings',
+    id: 'meetings-hours',
     label: 'Часов на встречах',
-    value: '210k',
-    icon: <Users className="w-6 h-6" />,
+    value: '210 000',
+    icon: <Clock className="w-6 h-6" />,
     color: ThemeColor.PURPLE
   },
   {
@@ -344,27 +288,14 @@ export const FUN_STATS: StatItem[] = [
     color: ThemeColor.PINK
   },
   {
-    id: 'prod-fix',
-    label: 'Чинили прод',
-    value: '17',
-    icon: <Terminal className="w-6 h-6" />,
-    color: ThemeColor.WHITE
+    id: 'prod-fixes',
+    label: 'Ломали и чинили прод',
+    value: '17 раз',
+    icon: <ZapOff className="w-6 h-6" />,
+    color: ThemeColor.PINK
   }
 ];
 
-// Charts data placeholders
-export const RELEASES_DATA = [
-  { name: 'Features', value: 45, fill: '#00f3ff' },
-  { name: 'Bugs', value: 35, fill: '#ff0055' },
-  { name: 'Tech Debt', value: 20, fill: '#bc13fe' }
-];
-
-export const FEEDBACK_DATA = [
-  { name: 'Success', value: 85, fill: '#0aff00' },
-  { name: 'Iterate', value: 15, fill: '#ef4444' }
-];
-
-// Aggregated list for AI generation
 export const ALL_STATS = [
   ...HIGHLIGHTS_STATS, 
   ...PRODUCT_STATS, 
@@ -374,3 +305,29 @@ export const ALL_STATS = [
   ...BUSINESS_STATS,
   ...FUN_STATS
 ];
+
+// На основе бенчмарков топовых банковских приложений
+export const RELEASES_DATA = [
+  { name: 'Новые фичи', value: 42, fill: '#00f3ff' },
+  { name: 'UI/UX Оптимизация', value: 18, fill: '#bc13fe' },
+  { name: 'Безопасность', value: 15, fill: '#0aff00' },
+  { name: 'Техдолг/Инфра', value: 15, fill: '#ff0055' },
+  { name: 'Патчи и Фиксы', value: 10, fill: '#facc15' }
+];
+
+// На основе эффективности Agile-процессов Core Team
+export const FEEDBACK_DATA = [
+  { name: 'Анализ/Груминг', value: 98, fill: '#00f3ff' },
+  { name: 'Sprint Dev', value: 87, fill: '#bc13fe' },
+  { name: 'Авто-тесты QA', value: 94, fill: '#0aff00' },
+  { name: 'Store Review', value: 96, fill: '#ff0055' },
+  { name: 'Production SRE', value: 99, fill: '#facc15' }
+];
+
+// Team DNA exported for components and AI services
+export const TEAM_DNA = {
+  executing: { label: 'Исполнение', value: 68, color: 'bg-neon-blue text-neon-blue' },
+  strategic: { label: 'Стратегия', value: 60, color: 'bg-neon-purple text-neon-purple' },
+  relationship: { label: 'Отношения', value: 52, color: 'bg-neon-pink text-neon-pink' },
+  influencing: { label: 'Влияние', value: 38, color: 'bg-yellow-500 text-yellow-500' }
+};

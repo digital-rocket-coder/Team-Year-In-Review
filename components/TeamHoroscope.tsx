@@ -2,14 +2,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { TEAM_DNA } from '../constants';
 import { Sparkles, Brain, Hammer, Heart, Megaphone, Star, Loader2, RefreshCw } from 'lucide-react';
-import { generateCharacterAvatar } from '../services/geminiService';
 
 export const TeamHoroscope: React.FC = () => {
   const [loading, setLoading] = useState(true);
-  const [avatar, setAvatar] = useState<string | null>(null);
   const [animateBars, setAnimateBars] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const hasLoaded = useRef(false);
+
+  // Ссылка на статичный мистический аватар
+  const astrologerAvatarUrl = "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=256&h=256&auto=format&fit=crop";
 
   const staticHoroscope = `Звезды (и Jira) говорят: в новом году наш код будет работать даже на калькуляторах.
 
@@ -23,31 +24,22 @@ export const TeamHoroscope: React.FC = () => {
     setLoading(true);
     setAnimateBars(false);
     
-    const avatarPromise = generateCharacterAvatar("A mystical futuristic cyberpunk female astrologer, purple neon aura, digital tarot cards, ethereal digital face, highly detailed, 8k, synthwave aesthetic.");
-    
-    // Мгновенный запуск анимации шкал ДНК
-    setAnimateBars(true);
-    
-    // Ускоренная имитация загрузки астрального прогноза
-    const [avatarUrl] = await Promise.all([
-      avatarPromise,
-      new Promise(resolve => setTimeout(resolve, 800))
-    ]);
-
-    if (avatarUrl) setAvatar(avatarUrl);
-    setLoading(false);
+    // Мгновенный запуск анимации шкал
+    setTimeout(() => {
+      setAnimateBars(true);
+      setLoading(false);
+    }, 600);
   };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Срабатывает мгновенно (threshold: 0.01)
         if (entry.isIntersecting && !hasLoaded.current) {
           hasLoaded.current = true;
           fetchData();
         }
       },
-      { threshold: 0.01 } // Минимальный порог для моментального старта при скролле
+      { threshold: 0.01 }
     );
 
     if (sectionRef.current) {
@@ -116,10 +108,7 @@ export const TeamHoroscope: React.FC = () => {
                         className={`h-full ${barColorClass} dna-bar-fill shadow-[0_0_15px_currentColor] relative`} 
                         style={{ width: animateBars ? `${getPercent(dna.value)}%` : '0%' }}
                     >
-                      {/* Shimmer Effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer" style={{ width: '100px' }}></div>
-                      
-                      {/* Leading edge glow */}
                       <div className="absolute top-0 right-0 h-full w-2 bg-white blur-[2px] opacity-50"></div>
                     </div>
                     {isInfluencing && (
@@ -148,19 +137,16 @@ export const TeamHoroscope: React.FC = () => {
                   <div className="w-24 h-24 border-t-2 border-b-2 border-neon-purple rounded-full animate-spin"></div>
                   <Loader2 className="absolute inset-0 m-auto text-neon-purple animate-pulse w-10 h-10" />
                </div>
-               <div className="space-y-3">
-                 <h3 className="text-neon-purple font-mono text-base animate-pulse uppercase tracking-[0.4em] font-bold">
-                   Сканирую звезды...
-                 </h3>
-               </div>
+               <h3 className="text-neon-purple font-mono text-base animate-pulse uppercase tracking-[0.4em] font-bold">
+                 Сканирую звезды...
+               </h3>
             </div>
           ) : (
             <div className="animate-in fade-in slide-in-from-right-4 duration-700">
                 <div className="flex flex-col md:flex-row items-center gap-6 mb-8">
-                    {/* Astrologer Photo */}
                     <div className="w-24 h-24 rounded-full border-2 border-neon-purple p-1 relative group overflow-hidden bg-black shrink-0 shadow-[0_0_40px_rgba(188,19,254,0.4)]">
                          <img 
-                            src={avatar || "https://api.dicebear.com/7.x/avataaars/svg?seed=Astrologer&backgroundColor=c0aede&clothing=collarAndSweater&eyes=happy"} 
+                            src={astrologerAvatarUrl} 
                             alt="Корпоративный Астролог" 
                             className="w-full h-full rounded-full object-cover transition-all duration-700 group-hover:scale-110"
                         />

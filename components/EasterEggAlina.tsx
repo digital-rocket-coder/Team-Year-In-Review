@@ -36,26 +36,31 @@ export const EasterEggAlina: React.FC = () => {
     <>
       {/* The Elusive Ball */}
       {!isOpen && (
-        <button
-          onClick={handleCatch}
-          onMouseEnter={moveBall} // Улетает при попытке навести, если не успел кликнуть
-          className="fixed z-[100] w-6 h-6 rounded-full bg-neon-pink shadow-[0_0_20px_#ff0055] transition-all duration-[600ms] cubic-bezier(0.34, 1.56, 0.64, 1) flex items-center justify-center group pointer-events-auto"
+        <div 
+          className="fixed z-[100] transition-all duration-[600ms] cubic-bezier(0.34, 1.56, 0.64, 1) flex items-center gap-3 group pointer-events-none"
           style={{ 
             top: position.top, 
             left: position.left,
-            animation: 'pulse 2s infinite'
           }}
         >
-          <span className="text-[10px] font-bold text-white font-mono animate-pulse">A</span>
+          <button
+            onClick={handleCatch}
+            onMouseEnter={moveBall} // Улетает при попытке навести, если не успел кликнуть
+            className="w-8 h-8 rounded-full bg-neon-pink shadow-[0_0_20px_#ff0055] flex items-center justify-center pointer-events-auto shrink-0 relative"
+            style={{ 
+              animation: 'pulse 2s infinite'
+            }}
+          >
+            <span className="text-xs font-bold text-white font-mono animate-pulse">A</span>
+            <div className="absolute inset-0 rounded-full border border-neon-pink animate-ping opacity-40"></div>
+          </button>
           
-          {/* Glitch circles around */}
-          <div className="absolute inset-0 rounded-full border border-neon-pink animate-ping opacity-40"></div>
-          
-          {/* Tooltip on hover (if caught) */}
-          <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-neon-pink text-white text-[8px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap pointer-events-none">
-            CATCH ME
+          <div className="bg-black/80 border border-neon-pink/40 backdrop-blur-sm px-3 py-1.5 rounded-lg pointer-events-none transform -translate-y-1 shadow-[0_4px_15px_rgba(255,0,85,0.2)] animate-float">
+             <span className="text-neon-pink font-mono text-[10px] font-bold uppercase tracking-widest whitespace-nowrap">
+               Нажми меня!
+             </span>
           </div>
-        </button>
+        </div>
       )}
 
       {/* Message Modal */}
