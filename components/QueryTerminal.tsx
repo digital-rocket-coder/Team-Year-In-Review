@@ -75,9 +75,9 @@ export const QueryTerminal: React.FC = () => {
         >
           {history.length === 0 && (
             <div className="text-gray-600 opacity-60 flex flex-col gap-1">
-              <p>> CORE_OS v4.0.5 KERNEL BOOTED...</p>
-              <p>> ALL SYSTEMS OPERATIONAL.</p>
-              <p>> TYPE 'help' TO BEGIN DATA RETRIEVAL.</p>
+              <p>&gt; CORE_OS v4.0.5 KERNEL BOOTED...</p>
+              <p>&gt; ALL SYSTEMS OPERATIONAL.</p>
+              <p>&gt; TYPE 'help' TO BEGIN DATA RETRIEVAL.</p>
             </div>
           )}
           
