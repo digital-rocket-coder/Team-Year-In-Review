@@ -186,7 +186,7 @@ export const QUALITY_STATS: StatItem[] = [
   }
 ];
 
-// 🧠 Команда и культура
+// 👥 Команда и культура
 export const TEAM_STATS: StatItem[] = [
   {
     id: 'team-reshuffle',
@@ -306,22 +306,26 @@ export const ALL_STATS = [
   ...FUN_STATS
 ];
 
-// На основе бенчмарков топовых банковских приложений
+/**
+ * 📊 Формируем RELEASES_DATA на основе общего количества фич (2 300)
+ * Распределение по типам задач (примерное, но логичное для 2025 года)
+ */
 export const RELEASES_DATA = [
-  { name: 'Новые фичи', value: 42, fill: '#00f3ff' },
-  { name: 'UI/UX Оптимизация', value: 18, fill: '#bc13fe' },
-  { name: 'Безопасность', value: 15, fill: '#0aff00' },
-  { name: 'Техдолг/Инфра', value: 15, fill: '#ff0055' },
-  { name: 'Патчи и Фиксы', value: 10, fill: '#facc15' }
+  { name: 'Новые фичи (CORE)', value: 1035, fill: '#00f3ff' }, // 45%
+  { name: 'UI/UX Оптимизация', value: 575, fill: '#bc13fe' },   // 25%
+  { name: 'Инфраструктура/SRE', value: 460, fill: '#0aff00' }, // 20%
+  { name: 'Безопасность', value: 230, fill: '#ff0055' }         // 10%
 ];
 
-// На основе эффективности Agile-процессов Core Team
+/**
+ * 📈 Формируем FEEDBACK_DATA на основе ключевых KPI из лендинга
+ */
 export const FEEDBACK_DATA = [
-  { name: 'Анализ/Груминг', value: 98, fill: '#00f3ff' },
-  { name: 'Sprint Dev', value: 87, fill: '#bc13fe' },
-  { name: 'Авто-тесты QA', value: 94, fill: '#0aff00' },
-  { name: 'Store Review', value: 96, fill: '#ff0055' },
-  { name: 'Production SRE', value: 99, fill: '#facc15' }
+  { name: 'Digital Share', value: 91, fill: '#00f3ff' },      // Из BUSINESS_STATS (91.4%)
+  { name: 'QA Coverage', value: 94, fill: '#bc13fe' },        // Из терминала (94%)
+  { name: 'Crash-Free Rate', value: 99, fill: '#0aff00' },    // Из терминала/саммари (99.99%)
+  { name: 'Store Success', value: 85, fill: '#ff0055' },      // Условный успех релизов в сторы
+  { name: 'User Engagement', value: 33, fill: '#facc15' }     // Из USAGE_STATS (33%)
 ];
 
 // Team DNA exported for components and AI services
