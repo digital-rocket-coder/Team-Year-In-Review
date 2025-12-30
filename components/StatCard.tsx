@@ -5,17 +5,18 @@ import { Trophy } from 'lucide-react';
 interface StatCardProps {
   item: StatItem;
   delay?: number;
-  className?: string; // Allow overriding classes
+  className?: string;
 }
 
 const CountUp: React.FC<{ value: string | number; className?: string; startAnimation: boolean }> = ({ value, className, startAnimation }) => {
   const [displayValue, setDisplayValue] = useState(0);
   const targetValueRef = useRef(0);
-  const isFloat = typeof value === 'string' && value.includes('.') && value.length < 5;
+  const isFloat = typeof value === 'string' && value.includes(',') && value.replace(/[^0-9]/g, '').length < 8;
   
   useEffect(() => {
+    // Extract numeric part considering negatives and commas/dots
     const numericPart = typeof value === 'string' 
-      ? parseFloat(value.replace(/[^0-9.]/g, '')) 
+      ? parseFloat(value.replace(/[^0-9.,-]/g, '').replace(',', '.')) 
       : value;
       
     if (!isNaN(numericPart)) {
@@ -37,7 +38,7 @@ const CountUp: React.FC<{ value: string | number; className?: string; startAnima
       
       const current = easeOutQuart(progress) * target;
       
-      setDisplayValue(isFloat ? parseFloat(current.toFixed(1)) : Math.floor(current));
+      setDisplayValue(isFloat ? parseFloat(current.toFixed(2)) : Math.floor(current));
 
       if (progress < 1) {
         window.requestAnimationFrame(step);
@@ -47,17 +48,24 @@ const CountUp: React.FC<{ value: string | number; className?: string; startAnima
     window.requestAnimationFrame(step);
   }, [startAnimation, value, isFloat]);
 
-  let formatted = displayValue.toLocaleString();
+  // When animation finishes, always return the exact original string if it was a string
   if (displayValue === targetValueRef.current && typeof value === 'string') {
-      if (value.includes('#') || value.includes('+')) {
-          formatted = value; 
-      }
-  } else if (isFloat) {
-      formatted = displayValue.toFixed(1);
+      return <span className={className}>{value}</span>;
+  }
+
+  let formatted = displayValue.toLocaleString('ru-RU');
+  if (isFloat) {
+      formatted = displayValue.toLocaleString('ru-RU', { minimumFractionDigits: 1, maximumFractionDigits: 2 });
   }
   
-  if(typeof value === 'string' && value.includes('#') && !formatted.includes('#')) formatted = '#' + formatted;
-  if(typeof value === 'string' && value.includes('+') && !formatted.includes('+')) formatted = formatted + '+';
+  // Basic prefix/suffix recovery during animation
+  if(typeof value === 'string') {
+    if (value.includes('#') && !formatted.includes('#')) formatted = '#' + formatted;
+    if (value.includes('+') && !formatted.includes('+')) formatted = '+' + formatted;
+    if (value.includes('-') && !formatted.includes('-')) formatted = '-' + Math.abs(displayValue).toLocaleString('ru-RU');
+    if (value.includes('%') && !formatted.includes('%')) formatted = formatted + '%';
+    if (value.includes('млн') && !formatted.includes('млн')) formatted = formatted + ' млн';
+  }
 
   return <span className={className}>{formatted}</span>;
 };
@@ -80,10 +88,10 @@ export const StatCard: React.FC<StatCardProps> = ({ item, delay = 0, className =
               setWidth(pct);
             }
           }, delay);
-          observer.disconnect(); // Animate only once
+          observer.disconnect(); 
         }
       },
-      { threshold: 0.2 } // Trigger when 20% visible
+      { threshold: 0.2 }
     );
 
     if (cardRef.current) {
@@ -96,25 +104,30 @@ export const StatCard: React.FC<StatCardProps> = ({ item, delay = 0, className =
   const isRank = item.type === 'rank';
   const isScale = item.type === 'scale' || item.maxValue;
 
-  // Use passed className or fallback to grid span from item if nothing passed
   const containerClasses = className || (item.colSpan || 'col-span-1');
+
+  const getFontSize = (val: string | number) => {
+    const len = String(val).length;
+    if (len > 12) return 'text-2xl md:text-3xl';
+    if (len > 9) return 'text-3xl md:text-4xl';
+    if (len > 7) return 'text-4xl md:text-5xl';
+    return 'text-5xl md:text-6xl';
+  };
+
+  const fontSizeClass = getFontSize(item.value);
 
   return (
     <div 
       ref={cardRef}
       className={`glass-card p-6 md:p-8 rounded-none md:rounded-lg relative overflow-hidden group transition-all duration-700 transform hover:scale-[1.02] hover:bg-white/5 ${containerClasses} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}
     >
-      
-      {/* Technical Corners */}
       <div className="tech-corner tech-corner-tl" />
       <div className="tech-corner tech-corner-tr" />
       <div className="tech-corner tech-corner-bl" />
       <div className="tech-corner tech-corner-br" />
 
-      {/* Scanning line effect */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-neon-blue/5 to-transparent -translate-y-full group-hover:animate-[scanline_1.5s_linear_infinite] pointer-events-none" />
 
-      {/* Rank Background Glow */}
       {isRank && (
         <div className="absolute -right-4 -top-4 w-32 h-32 bg-yellow-500/10 blur-3xl rounded-full" />
       )}
@@ -127,32 +140,27 @@ export const StatCard: React.FC<StatCardProps> = ({ item, delay = 0, className =
         </div>
         
         <div>
-          <h3 className={`text-5xl md:text-6xl font-display font-bold tracking-tight mb-2 ${item.color} ${isRank ? 'drop-shadow-[0_0_15px_rgba(250,204,21,0.5)]' : ''}`}>
+          <h3 className={`${fontSizeClass} font-display font-bold tracking-tight mb-2 ${item.color} ${isRank ? 'drop-shadow-[0_0_15px_rgba(250,204,21,0.5)]' : ''} leading-tight break-all`}>
             <CountUp value={item.value} startAnimation={isVisible} />
           </h3>
           
           <div className="flex items-center gap-3 mt-4 border-t border-white/10 pt-4">
             {!isScale && (
-              <span className={`h-[2px] w-6 bg-gray-600 group-hover:w-12 transition-all duration-500 ${item.color && item.color.replace('text-', 'bg-')}`}></span>
+              <span className={`h-[2px] w-4 bg-gray-600 group-hover:w-8 transition-all duration-500 ${item.color && item.color.replace('text-', 'bg-')}`}></span>
             )}
-            <p className="text-gray-300 text-sm md:text-base uppercase tracking-widest font-mono font-semibold">
+            <p className="text-gray-300 text-xs md:text-sm uppercase tracking-widest font-mono font-bold leading-tight">
               {item.label}
             </p>
             {item.subValue && (
-               <span className="text-neon-blue text-xs font-mono ml-auto opacity-90 border border-neon-blue/30 px-2 py-0.5 rounded bg-neon-blue/10">{item.subValue}</span>
+               <span className="text-neon-blue text-[10px] font-mono ml-auto opacity-90 border border-neon-blue/30 px-2 py-0.5 rounded bg-neon-blue/10 whitespace-nowrap">{item.subValue}</span>
             )}
           </div>
 
-          {/* Scale Animation (Progress Bar) */}
           {isScale && item.maxValue && (
             <div className="mt-6 w-full bg-gray-800/50 h-3 rounded-full overflow-hidden relative">
               <div 
                 className={`h-full rounded-full transition-all duration-[2000ms] ease-out ${item.color ? item.color.replace('text-', 'bg-') : 'bg-white'}`}
                 style={{ width: `${width}%` }}
-              />
-              <div 
-                className={`absolute top-0 h-full w-4 blur-[6px] bg-white transition-all duration-[2000ms] ease-out`}
-                style={{ left: `${width}%`, opacity: width > 0 ? 0.8 : 0 }}
               />
             </div>
           )}

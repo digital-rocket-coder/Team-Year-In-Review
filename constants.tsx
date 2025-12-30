@@ -159,13 +159,6 @@ export const PRODUCT_STATS: StatItem[] = [
     color: ThemeColor.PINK
   },
   {
-    id: 'ab-tests',
-    label: 'A/B-тестов',
-    value: 'XX', // Оставляем, если данных нет, или можно скрыть
-    icon: <FlaskConical className="w-6 h-6" />,
-    color: ThemeColor.BLUE
-  },
-  {
     id: 'release-cycle',
     label: 'Lead Time (дни)',
     value: '19',
@@ -187,7 +180,7 @@ export const USAGE_STATS: StatItem[] = [
   {
     id: 'web-users',
     label: 'Юзеров на сайте',
-    value: '39 000 000',
+    value: '39 млн',
     icon: <Globe className="w-6 h-6" />,
     color: ThemeColor.GREEN
   },
@@ -229,8 +222,8 @@ export const QUALITY_STATS: StatItem[] = [
   {
     id: 'support-calls',
     label: 'Снижение жалоб',
-    value: '5%',
-    icon: <TrendingUp className="w-6 h-6 rotate-180" />, // Arrow down visually
+    value: '5,5%',
+    icon: <TrendingUp className="w-6 h-6 rotate-180" />,
     color: ThemeColor.BLUE
   },
   {
@@ -243,7 +236,7 @@ export const QUALITY_STATS: StatItem[] = [
   {
     id: 'incidents',
     label: 'Сокращение ошибок',
-    value: '2 раза',
+    value: '-50%',
     icon: <AlertTriangle className="w-6 h-6" />,
     color: ThemeColor.PINK
   }
@@ -281,7 +274,7 @@ export const TEAM_STATS: StatItem[] = [
   }
 ];
 
-// 💰 Бизнес-эффект (Используем данные из блока Клиенты для заполнения)
+// 💰 Бизнес-эффект
 export const BUSINESS_STATS: StatItem[] = [
   {
     id: 'digital-share',
@@ -359,9 +352,17 @@ export const FUN_STATS: StatItem[] = [
   }
 ];
 
-// Unused chart data placeholders
-export const RELEASES_DATA = [];
-export const FEEDBACK_DATA = [];
+// Charts data placeholders
+export const RELEASES_DATA = [
+  { name: 'Features', value: 45, fill: '#00f3ff' },
+  { name: 'Bugs', value: 35, fill: '#ff0055' },
+  { name: 'Tech Debt', value: 20, fill: '#bc13fe' }
+];
+
+export const FEEDBACK_DATA = [
+  { name: 'Success', value: 85, fill: '#0aff00' },
+  { name: 'Iterate', value: 15, fill: '#ef4444' }
+];
 
 // Aggregated list for AI generation
 export const ALL_STATS = [

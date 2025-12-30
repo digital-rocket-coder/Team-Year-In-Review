@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { 
   APP_CONFIG, 
@@ -12,6 +13,8 @@ import {
 import { StatCard } from './components/StatCard';
 import { GeminiSummary } from './components/GeminiSummary';
 import { TeamHoroscope } from './components/TeamHoroscope';
+import { DigitalSnow } from './components/DigitalSnow';
+import { EasterEggAlina } from './components/EasterEggAlina';
 import { Activity, Server, ArrowDown, ChevronRight, Zap, Coffee, Sparkles } from 'lucide-react';
 
 const App: React.FC = () => {
@@ -23,6 +26,12 @@ const App: React.FC = () => {
         <div className="absolute inset-0 bg-grid opacity-15 transform perspective-500 rotate-x-6 scale-125" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[50vh] bg-neon-blue/5 rounded-full blur-[120px] animate-pulse-slow" />
       </div>
+
+      {/* Digital Snow Effect */}
+      <DigitalSnow />
+
+      {/* Easter Egg Ball */}
+      <EasterEggAlina />
 
       {/* Navigation / Header */}
       <nav className="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center backdrop-blur-sm bg-dark-bg/50 border-b border-white/5">
@@ -58,7 +67,7 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION: HIGHLIGHTS (🔥 Из твоего списка) */}
+      {/* SECTION: HIGHLIGHTS */}
       <section className="relative py-24 px-4 md:px-12 z-10 max-w-7xl mx-auto">
         <div className="mb-12 border-l-4 border-neon-blue pl-6 flex justify-between items-end">
           <div>
@@ -80,7 +89,7 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION: PRODUCT & QUALITY (🚀 Продукт + 📈 Качество) */}
+      {/* SECTION: PRODUCT & QUALITY */}
       <section className="relative py-24 px-4 md:px-12 z-10 bg-white/5">
         <div className="max-w-7xl mx-auto">
            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -114,7 +123,7 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION: USAGE & BUSINESS (👥 Клиенты + 💰 Бизнес) */}
+      {/* SECTION: USAGE & BUSINESS */}
       <section className="relative py-24 px-4 md:px-12 z-10 max-w-7xl mx-auto">
          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             
@@ -146,7 +155,7 @@ const App: React.FC = () => {
          </div>
       </section>
 
-      {/* SECTION: TEAM (🧠 Команда) */}
+      {/* SECTION: TEAM */}
       <section className="relative py-24 px-4 md:px-12 z-10 bg-gradient-to-b from-black to-dark-bg border-t border-white/10">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12 text-center">
@@ -162,7 +171,7 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION: FUN (😄 Мемные) */}
+      {/* SECTION: FUN */}
       <section className="relative py-16 px-4 z-10 overflow-hidden bg-neon-purple/5">
         <div className="max-w-7xl mx-auto">
            <div className="flex items-center gap-4 mb-8 justify-center opacity-70">
@@ -185,7 +194,7 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION: TEAM HOROSCOPE (New!) */}
+      {/* SECTION: TEAM HOROSCOPE */}
       <section className="relative py-16 px-4 md:px-12 z-10 max-w-4xl mx-auto">
         <div className="mb-8 flex items-center justify-center gap-2 opacity-50">
            <Sparkles className="text-neon-purple w-4 h-4" />
@@ -200,7 +209,7 @@ const App: React.FC = () => {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-8 border-t border-white/10 bg-black text-center font-mono text-xs text-gray-600">
+      <footer className="py-8 border-t border-white/10 bg-black text-center font-mono text-xs text-gray-600 relative z-10">
         <div className="flex justify-center items-center gap-8 mb-4">
            <span className="flex items-center gap-2"><Activity className="w-4 h-4" /> SYSTEM OK</span>
            <span className="flex items-center gap-2"><Server className="w-4 h-4" /> SERVER {APP_CONFIG.year}</span>
