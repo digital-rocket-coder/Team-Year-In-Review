@@ -110,7 +110,6 @@ export const QueryTerminal: React.FC = () => {
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Введите команду (help, stats, bugs...)" 
                 className="bg-transparent border-none outline-none flex-1 font-mono text-sm text-gray-200 placeholder:text-gray-700"
-                autoFocus
               />
               <button 
                 type="submit"

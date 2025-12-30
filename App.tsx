@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { 
   APP_CONFIG, 
   HIGHLIGHTS_STATS,
@@ -21,6 +21,12 @@ import { QueryTerminal } from './components/QueryTerminal';
 import { Activity, Server, ArrowDown, Target, Zap, Coffee, BarChart3, Users, Heart, CheckCircle2 } from 'lucide-react';
 
 const App: React.FC = () => {
+  useEffect(() => {
+    // Принудительно прокручиваем в начало при загрузке, 
+    // чтобы предотвратить прыжки из-за автофокуса или кеша прокрутки браузера
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-dark-bg text-white font-sans selection:bg-neon-blue selection:text-black overflow-x-hidden relative">
       
